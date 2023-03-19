@@ -1,50 +1,70 @@
-displayName: 'Module Boilerplate'       # Display name for the module that will be displayed in the UI.
-moduleName: 'module-boilerplate'        # Module name that will be used to reference the module, and uniquely identify the module and their versions.
-description: 'This is module boilerplate description.'       # Module description that will be displayed in the UI.
-versionName: 'v1.0.0'                    # Module version name that will be used to reference the module version, and uniquely identify the module version with a common name.
-isPublic: true                          # Boolean value that indicates if the module is Public or Private.
-categories:                             # Array of category that will be used to group the module in the UI.
-  - 'CATEGORY_1'
-  - 'CATEGORY_2'
-type: 'Output'      # Module type (Input, Processing, Output) that will be used to group the module in the UI.
+displayName: 'Zaikio Output'
+moduleName: 'zaikio-output'
+description: 'Send requests to Zaikio API Mission Control.'
+versionName: 'v1.0.0'
+isPublic: true
+categories:
+  - 'Egress'
+type: 'Output'     
 image:
-  name: 'weevenetwork/module-boilerplate'     # Image name from the docker registry.
-  tag: 'latest'                               # Image tag from the docker registry.
-  homepage: 'https://hub.docker.com/weevenetwork/module-boilerplate'      # Image homepage from the docker registry.
-repository: 'https://github.com/weeve-modules/python-output-module-boilerplate'     # Repository URL to source code.
-envs:                                   # Array of environment variables that will be used to configure the module. Also used to show related fields on the UI.
-  - name: Setting 1                   # name of the field to be displayed on the UI.
-    key: ENVIRONMENT_1                # key to set in the environment variables.
-    description: Module setting 1     # Description/helper text for the field.
-    value: ''                         # Value to be set in the environment variables.
-    type: 'select'                    # Type of the field. Possible values are: ['text', 'select', 'boolean', 'date', 'time', 'dateTime-local', 'number', 'multiple', 'CSV', 'file']
-    options:                          # Options for the field if it is a select or multiple select. An array of string options
-      - option_A
-      - option_B
-      - option_C
-    dependencies: []                     # List of dependencies for the field. This field is only displayed if all the dependencies are met. If
-  - name: Setting 2
-    key: ENVIRONMENT_2
-    description: Module setting 2
-    value: ''
-    type: 'number'
+  name: 'weevenetwork/zaikio-output'
+  tag: 'v1.0.0'                           
+  homepage: 'https://hub.docker.com/r/weevenetwork/zaikio-output' 
+repository: 'https://github.com/weeve-modules/zaikio-output'  
+envs:                            
+  - name: Personal Access Token      
+    key: PERSONAL_ACCESS_TOKEN             
+    description: Personal Access Token to Zaikio Mission Control.
+    value: 'my-zaikio-mission-control-token'                     
+    type: 'text'                   
     options: []
-    dependencies:
-      - key: ENVIRONMENT_1              # key of the dependency
-        value: option_B                 # value of the dependency
-ports:                                  # Array of ports that will be exposed by the module.
-  - container: 8080                     # Port number from the container.
-    host: 8080                          # Port number to map on the host.
+    dependencies: []
+  - name: Zaikio Server      
+    key: ZAIKIO_SERVER             
+    description: Zaikio server to send requests to. Production (https://mc.zaikio.com/api/v1) or Sandbox Test Server (https://mc.sandbox.zaikio.com/api/v1).
+    value: 'https://mc.sandbox.zaikio.com/api/v1'                     
+    type: 'select'                   
+    options:
+      - 'https://mc.sandbox.zaikio.com/api/v1'
+      - 'https://mc.zaikio.com/api/v1'
+    dependencies: []
+  - name: Endpoint      
+    key: ENDPOINT             
+    description: Zaikio API method and endpoint to send data to.
+    value: 'POST /jobs'                     
+    type: 'select'                   
+    options:
+      - 'POST /jobs/{job_id}/finished_product'
+      - 'GET /jobs/{job_id}/finished_product'
+      - 'PATCH /jobs/{job_id}/finished_product'
+      - 'DELETE /jobs/{job_id}/finished_product'
+      - 'GET /jobs'
+      - 'POST /jobs'
+      - 'PATCH /jobs/{job_id}'
+      - 'DELETE /jobs/{job_id}'
+      - 'GET /jobs/{job_id}'
+      - 'POST /executions'
+      - 'GET /executions'
+      - 'PATCH /executions/{execution_id}'
+      - 'GET /executions/{execution_id}'
+      - 'DELETE /executions/{execution_id}'
+    dependencies: []  
+  - name: Object ID      
+    key: OBJECT_ID             
+    description: Provide object's ID if the above endpoint request needs Job ID or Execution ID.
+    value: 'my-job-id'                     
+    type: 'text'                   
+    options: []
+    dependencies: []                      
+ports: []
 envPorts: []
-mounts:
-  - container: '/data'                  # Mount path from the container.
-    host: '/data'                       # Mount path to map on the host.
+mounts: []
 envMounts: []
 devices: []
 envDevices: []
-tags:                                   # Array of tags.
+tags:                                
   - 'Python'
   - 'Output'
-  - 'Boilerplate'
+  - 'Zaikio'
   - '1.0.0'
-icon: 'https://some.url/to/icon.png'    # Icon URL that will be displayed in the UI.
+icon: 'https://icons-020-demo.s3.eu-central-1.amazonaws.com/mi_zaiko_ouput.png'  
