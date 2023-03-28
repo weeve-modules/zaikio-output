@@ -55,7 +55,27 @@ envs:
     value: 'my-job-id'                     
     type: 'text'                   
     options: []
-    dependencies: []                      
+    dependencies:
+      - key: ENDPOINT
+        value: 'POST /jobs/{job_id}/finished_product'
+      - key: ENDPOINT
+        value: 'GET /jobs/{job_id}/finished_product'
+      - key: ENDPOINT
+        value: 'PATCH /jobs/{job_id}/finished_product'
+      - key: ENDPOINT
+        value: 'DELETE /jobs/{job_id}/finished_product'
+      - key: ENDPOINT
+        value: 'PATCH /jobs/{job_id}'
+      - key: ENDPOINT
+        value: 'DELETE /jobs/{job_id}'
+      - key: ENDPOINT
+        value: 'GET /jobs/{job_id}'     
+      - key: ENDPOINT
+        value: 'PATCH /executions/{execution_id}'
+      - key: ENDPOINT
+        value: 'GET /executions/{execution_id}'
+      - key: ENDPOINT
+        value: 'DELETE /executions/{execution_id}'
 ports: []
 envPorts: []
 mounts: []
