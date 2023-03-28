@@ -47,19 +47,20 @@ def module_main(received_data: any) -> str:
                 }
             )
             if resp.status_code != 201:
-                log.error(f"Error when sending request: {resp.json()}")
+                return f"Error when sending request: {resp.json()}"
+            else:
+                log.info("POST request successfully sent.")
         elif METHOD == 'GET':
             resp = requests.get(
                 url=URL,
                 headers={
-                    'Authorization': f'Bearer {TOKEN}',
-                    'Content-Type': 'application/json'
+                    'Authorization': f'Bearer {TOKEN}'
                 }
             )
             if resp.status_code == 200:
                 log.info(f"Fetched data: {resp.json()}")
             else:
-                log.error(f"Error when sending request: {resp.json()}")
+                return f"Error when sending request: {resp.json()}"
         elif METHOD == 'PATCH':
             resp = requests.patch(
                 url=URL,
@@ -70,17 +71,20 @@ def module_main(received_data: any) -> str:
                 }
             )
             if resp.status_code != 200:
-                log.error(f"Error when sending request: {resp.json()}")
+                return f"Error when sending request: {resp.json()}"
+            else:
+                log.info("PATCH request successfully executed.")
         else: # METHOD == 'DELETE'
             resp = requests.delete(
                 url=URL,
                 headers={
-                    'Authorization': f'Bearer {TOKEN}',
-                    'Content-Type': 'application/json'
+                    'Authorization': f'Bearer {TOKEN}'
                 }
             )
             if resp.status_code != 204:
-                log.error(f"Error when sending request: {resp.json()}")
+                return f"Error when sending request: {resp.json()}"
+            else:
+                log.info("DELETE request successfully executed.")
 
         return None
 
