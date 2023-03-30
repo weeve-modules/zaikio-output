@@ -1,13 +1,17 @@
 version: "3.0"
 services:
-  boilerplate:
+  zaikio-output:
     build:
       context: ../
       dockerfile: docker/Dockerfile
     environment:
-      MODULE_NAME: "boilerplate"
+      MODULE_NAME: "zaikio-output"
       MODULE_TYPE: "Output"
       INGRESS_HOST: "0.0.0.0"
       INGRESS_PORT: "80"
+      PERSONAL_ACCESS_TOKEN: "my-zaikio-token-12345"
+      ZAIKIO_SERVER: "https://mc.sandbox.zaikio.com/api/v1"
+      ENDPOINT: "POST /jobs"
+      OBJECT_ID: "job-id-12345"
     ports:
       - 80:80
